@@ -1,31 +1,50 @@
 #include <stdio.h>
+#include <ctype.h>
 
 int main()
 {
-    int a, b, c, ans, D;
-    scanf("%d %d %d", &a, &b, &c);
+    double a, b, c, ans, D;
 
-    if(a == 0){
-        if(b!=0){
-            printf("1\n");
-        }
-        if((b == 0) && (c == 0)){
-            printf("Besconechno");
-        }
+    if(scanf("%lf", &a) != 1){
+        printf("число нужно\n");
     }
     else{
-
-        D = b*b - 4*a*c;
-
-        if (D > 0.0){
-            printf("2\n");
-        }
-        else if (D == 0.0){
-            printf("1\n");
+        if (scanf("%lf", &b) != 1)
+        {
+            printf("число нужно\n");
         }
         else{
-            printf("0\n");
-        }
+            if (scanf("%lf", &c) != 1)
+            {
+                printf("число нужно\n");
+            }
+            else{
+                if(a == 0){
+                    if(b!=0){
+                        printf("1\n");
+                    }
+                    if((b == 0) && (c == 0)){
+                        printf("Besconechno\n");
+                    }
+                }
+                else{
 
+                    D = b*b - 4*a*c;
+
+                    if (D > 0.0){
+                        printf("2\n");
+                    }
+                    else if (D == 0.0){
+                        printf("1\n");
+                    }
+                    else{
+                        printf("0\n");
+                    }
+                }
+            }
+            
+        }
+        
     }
+        
 }
