@@ -2,8 +2,7 @@
 
 int main()
 {
-    int a, b, c, ans;
-    float D;
+    int a, b, c, ans, D;
     scanf("%d %d %d", &a, &b, &c);
 
     if(a == 0){
