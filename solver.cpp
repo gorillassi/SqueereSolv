@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 
-int solver(double a,double b,double c){
+int solver(double a, double b, double c){
     if(a == 0){
         if(b != 0){
             printf("1\n");
