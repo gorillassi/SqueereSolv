@@ -4,7 +4,8 @@
 int main()
 {
     double a, b, c, ans, D;
-
+    printf("программа нахождения корней\n");
+    
     if(scanf("%lf", &a) != 1){
         printf("число нужно\n");
     }
