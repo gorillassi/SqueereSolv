@@ -1,51 +1,45 @@
 #include <stdio.h>
 #include <ctype.h>
+#include <math.h>
+#include <stdbool.h>
+//#include "solver.cpp"
 
-int main()
-{
-    double a, b, c, ans, D;
-    printf("программа нахождения корней\n");
-    
-    if(scanf("%lf", &a) != 1){
-        printf("число нужно\n");
+int solver(double a, double b, double c){
+    if(a == 0){
+        if(b != 0){
+            return(1);
+        }
+        if((b == 0) && (c == 0)){
+            return(3);
+        }
     }
     else{
-        if (scanf("%lf", &b) != 1)
-        {
-            printf("число нужно\n");
+        double D = 0.0;
+        D = b*b - 4*a*c;
+
+        const double e = 0.000001;
+
+        if(D > 0.0){
+            return(2);
+        }
+        else if(fabs(D) < e){
+            return(1);
         }
         else{
-            if (scanf("%lf", &c) != 1)
-            {
-                printf("число нужно\n");
-            }
-            else{
-                if(a == 0){
-                    if(b!=0){
-                        printf("1\n");
-                    }
-                    if((b == 0) && (c == 0)){
-                        printf("Besconechno\n");
-                    }
-                }
-                else{
-
-                    D = b*b - 4*a*c;
-
-                    if (D > 0.0){
-                        printf("2\n");
-                    }
-                    else if (D == 0.0){
-                        printf("1\n");
-                    }
-                    else{
-                        printf("0\n");
-                    }
-                }
-            }
-            
+            return(0);
         }
-        
     }
-        
+}
+
+int main(){
+    printf("программа нахождения корней\n");
+
+    double a = 0.0, b = 0.0, c = 0.0;
+
+    while((scanf("%lf %lf %lf", &a, &b, &c) != 3 || (a != '\n') || (b != '\n') || (c != '\n'))){
+        printf("neprav\n");
+        while(getchar() != '\n') {}
+    }
+
+    
 }
