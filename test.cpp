@@ -14,8 +14,13 @@ void Test(){
 
 }
 
+
+int isZero(double i){
+    return (fabs(i) < E);
+}
+
 int lenearsorver(double a, double b, double c, double *x1, int *n){
-    if(fabs(b) > E){
+    if(isZero(b)){
         return Os;
         *x1 = -c / b;
     }
@@ -30,7 +35,7 @@ int lenearsorver(double a, double b, double c, double *x1, int *n){
 }
 
 double solver(double a, double b,double c, double *x1, double *x2, int *n){
-    if(a == 0){
+    if(isZero(a)){
         return lenearsorver(a, b, c, x1, n);
     }
     
