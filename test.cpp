@@ -3,61 +3,82 @@
 #include <math.h>
 #include <stdbool.h>
 //#include "solver.cpp"
-int lenearsorver(double a, double b, double c){
-    if(a == 0){
-        if(b != 0){
-            double x1 = -c/b;
-            return(x1);
-        }
-        if((b == 0) && (c == 0)){
-            printf("3\n");
-        }
-        else{
-            return();
-        }
-    }
+
+const double E = 0.000001;
+
+enum NUlik{
+    Ns = 0,Os = 1,Ts = 2,Bs = 3
+};
+
+void Test(){
+
 }
-double solver(double a, double b, double c, double *x1, double *x2){
-    
-    double D = b*b - 4*a*c;
 
-    const double E = 0.000001;
-
-    if(D > 0.0){
-        printf("2\n");
+int lenearsorver(double a, double b, double c, double *x1, int *n){
+    if(fabs(b) > E){
+        return Os;
+        *x1 = -c / b;
     }
-    else if(fabs(D) < E){
-        
-        return(x1);
+    if(((fabs(b)) < E) && ((fabs(c)) < E)){
+        *n = 3;
+        return Bs;
     }
     else{
-        return(8);
-    }   
+        return Ns;
+    }  
+    return 0; 
+}
+
+double solver(double a, double b,double c, double *x1, double *x2, int *n){
+    if(a == 0){
+        return lenearsorver(a, b, c, x1, n);
+    }
+    
+    double D = b*b - 4*a*c;
+    
+    if(D > 0.0){  
+        return Ts;       
+        *x1 = (-b + sqrt(D)) / (2*a);
+        *x2 = (-b - sqrt(D)) / (2*a);           
+    }
+    else if((fabs(D)) < E){
+        return Os;
+        *x1 = -b / (2*a);          
+    }
     return 0;
 }
 
-int vivod(int i){
-    if(i == 1){
-        printf("1");
-    }
-    if(i == 2){
-        printf("2");
-    }
-    if(i == 3){
-        printf("3");    
+int vivod(int NUlik, double x1, double x2){
+    
+    switch(NUlik){
+        case Ns: printf("No answers\n"); 
+                  break;
+        case Os: printf("1 answer, x1 = %lf\n", x1); 
+                  break;
+        case Ts: printf("2 answers, x1 = %lf, x2 = %lf\n",x1 , x2); 
+                  break;
+        case Bs: printf("Besconechbo\n"); 
+                  break;        
+        default:
+            printf("EROR\n");
     }
     return 0;
 }
 
 int main(){ 
-    printf("программа нахождения корней\n");
+    printf("Programm: solver equation\n"
+            "Enter your numbers:\n");
 
     double a = 0.0, b = 0.0, c = 0.0, x1 = 0.0, x2 = 0.0;
-
-    while((scanf("%lf %lf %lf", &a, &b, &c) != 3)){
-        printf("neverno vvedite eshe\n");
-        while(getchar() != '\n');
+    int n = 0, NUlik  = 0;
+ 
+    while((scanf("%lf %lf %lf", &a, &b, &c) != 3)){        
+        while(getchar() != '\n'){}
+        printf("Whrong input, please try again...\n");
     }
-    
-    solver(a, b, c);
+
+    solver(a, b, c, &x1, &x2, &n);
+    vivod(n, x1, x2);
+
+    return 0;
 }
