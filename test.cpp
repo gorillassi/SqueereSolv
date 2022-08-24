@@ -3,35 +3,37 @@
 #include <math.h>
 #include <stdbool.h>
 //#include "solver.cpp"
-
-int solver(double a, double b, double c){
+int lenearsorver(double a, double b, double c){
     if(a == 0){
         if(b != 0){
             double x1 = -c/b;
-            printf("%lf",x1);
+            return(x1);
         }
         if((b == 0) && (c == 0)){
             printf("3\n");
         }
+        else{
+            return();
+        }
+    }
+}
+double solver(double a, double b, double c, double *x1, double *x2){
+    
+    double D = b*b - 4*a*c;
+
+    const double E = 0.000001;
+
+    if(D > 0.0){
+        printf("2\n");
+    }
+    else if(fabs(D) < E){
+        
+        return(x1);
     }
     else{
-        double D = 0.0;
-        D = b*b - 4*a*c;
-
-        const double e = 0.000001;
-
-        if(D > 0.0){
-            printf("2\n");
-        }
-        else if(fabs(D) < e){
-            double x1 = 0, x2 = 0;
-            printf("%lf %lf",x1, x2);
-        }
-        else{
-            printf("no resheni\n");
-        }
-    }
-    return 115;
+        return(8);
+    }   
+    return 0;
 }
 
 int vivod(int i){
@@ -50,12 +52,12 @@ int vivod(int i){
 int main(){ 
     printf("программа нахождения корней\n");
 
-    double a = 0.0, b = 0.0, c = 0.0;
+    double a = 0.0, b = 0.0, c = 0.0, x1 = 0.0, x2 = 0.0;
 
     while((scanf("%lf %lf %lf", &a, &b, &c) != 3)){
         printf("neverno vvedite eshe\n");
         while(getchar() != '\n');
     }
     
-    solver(a,b,c);
+    solver(a, b, c);
 }
