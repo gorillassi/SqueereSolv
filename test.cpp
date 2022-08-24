@@ -7,47 +7,48 @@
 const double E = 0.000001;
 
 enum NUlik{
-    Ns = 0,Os = 1,Ts = 2,Bs = 3
+    Ns = 0, 
+    Os = 1,
+    Ts = 2,
+    Bs = 3
 };
 
 void Test(){
 
 }
 
-
 int isZero(double i){
     return (fabs(i) < E);
 }
 
-int lenearsorver(double a, double b, double c, double *x1, int *n){
+int lenearsorver(double a, double b, double c, double *x1,int *NUlik){
     if(isZero(b)){
-        return Os;
-        *x1 = -c / b;
+        *NUlik = Os;
+        *x1 = -(c) / b;
     }
-    if(((fabs(b)) < E) && ((fabs(c)) < E)){
-        *n = 3;
-        return Bs;
+    if(((isZero(b)) && (isZero(c)))){
+        *NUlik = Bs;
     }
     else{
-        return Ns;
+        *NUlik = Ns;
     }  
     return 0; 
 }
 
-double solver(double a, double b,double c, double *x1, double *x2, int *n){
+double solver(double a, double b,double c, double *x1, double *x2, int *NUlik){
     if(isZero(a)){
-        return lenearsorver(a, b, c, x1, n);
+        lenearsorver(a, b, c, x1, NUlik);
     }
     
     double D = b*b - 4*a*c;
     
     if(D > 0.0){  
-        return Ts;       
+        *NUlik = Ts;       
         *x1 = (-b + sqrt(D)) / (2*a);
         *x2 = (-b - sqrt(D)) / (2*a);           
     }
     else if((fabs(D)) < E){
-        return Os;
+        *NUlik = Os;
         *x1 = -b / (2*a);          
     }
     return 0;
@@ -82,8 +83,8 @@ int main(){
         printf("Whrong input, please try again...\n");
     }
 
-    solver(a, b, c, &x1, &x2, &n);
-    vivod(n, x1, x2);
+    solver(a, b, c, &x1, &x2, &NUlik);
+    vivod(NUlik, x1, x2);
 
     return 0;
 }
