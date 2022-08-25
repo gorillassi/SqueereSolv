@@ -2,6 +2,8 @@
 #include <math.h>
 #include "common.h"
 
+
+
 int isZero(double i){
     return (fabs(i) < Epsilon);
 }
@@ -27,6 +29,7 @@ int solver(double a, double b,double c, double *x1, double *x2, int *NumOfRoots)
     assert (x1);
     assert (x2);
     assert (NumOfRoots);
+    assert (x1 != x2);
 
     if(isZero(a)){
         return lenearsorver(b, c, x1, NumOfRoots);
