@@ -21,23 +21,23 @@ int isZero(double i){
     return (fabs(i) < E);
 }
 
-int lenearsorver(double a, double b, double c, double *x1,int *NUlik){
+int lenearsorver(double b, double c, double *x1,int *NUlik){
     if(isZero(b)){
-        *NUlik = Os;
-        *x1 = -(c) / b;
+        *NUlik = Ns;
     }
     if(((isZero(b)) && (isZero(c)))){
         *NUlik = Bs;
     }
-    else{
-        *NUlik = Ns;
+    else{      
+        *NUlik = Os;
+        *x1 = -(c) / b;        
     }  
     return 0; 
 }
 
 double solver(double a, double b,double c, double *x1, double *x2, int *NUlik){
     if(isZero(a)){
-        lenearsorver(a, b, c, x1, NUlik);
+        return lenearsorver(b, c, x1, NUlik);
     }
     
     double D = b*b - 4*a*c;
@@ -54,8 +54,7 @@ double solver(double a, double b,double c, double *x1, double *x2, int *NUlik){
     return 0;
 }
 
-int vivod(int NUlik, double x1, double x2){
-    
+int vivod(int NUlik, double x1, double x2){    
     switch(NUlik){
         case Ns: printf("No answers\n"); 
                   break;
