@@ -10,5 +10,21 @@ enum NumOfRoots{
     Infinity = 3,
 };
 
+enum NumOfRootsTest{
+    NoRootsTest = 0,
+    OneRootTest = 1,
+    TwoRootsTest = 2,
+    InfinityTest = 3,
+};
 
-#endif // CONTSTANTS_H
+struct Equation
+{
+    double a;
+    double b;
+    double c;
+    NumOfRoots count = NoRoots;
+    double x1;
+    double x2;
+};
+
+#endif // COMMON_H

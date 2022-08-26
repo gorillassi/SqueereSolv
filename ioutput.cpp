@@ -10,8 +10,6 @@ void greeting(){
 }
 
 void intput(double *a, double *b, double *c){
-
-
     while((scanf("%lf %lf %lf", a, b, c) != 3)){        
         while(getchar() != '\n'){}
         printf("Wrong input, please try again...\n");
