@@ -8,43 +8,48 @@ int isZero(double i){
     return (fabs(i) < Epsilon);
 }
 
-int lenearsorver(double b, double c, double *x1, int *NumOfRoots){
-    assert (x1);
-    assert (NumOfRoots);
+int lenearsorver(struct coeficcents coef, struct solutions* sol){
+    assert (sol->x1);
+    assert (sol->root_count);
     
-    if(isZero(b)){
-        *NumOfRoots = NoRoots;
+    if(isZero(coef.b)){
+        (sol->root_count) = NoRoots;
     }
-    if(((isZero(b)) && (isZero(c)))){
-        *NumOfRoots = Infinity;
+    if(((isZero(coef.b)) && (isZero(coef.c)))){
+        (sol->root_count) = Infinity;
     }
     else{      
-        *NumOfRoots = OneRoot;
-        *x1 = -(c) / b;        
+        (sol->root_count) = OneRoot;
+        (sol->x1) = -(coef.c) / (coef.b);        
     }  
     return 0; 
 }
 
-int solver(double a, double b,double c, double *x1, double *x2, int *NumOfRoots){
-    assert (x1);
-    assert (x2);
-    assert (NumOfRoots);
-    assert (x1 != x2);
+int solver(struct coeficcents coef , struct solutions* sol){
+    assert (sol->x1);
+    assert (sol->x2);
+    //
+    assert ( sol->x1 != sol->x2);
 
-    if(isZero(a)){
-        return lenearsorver(b, c, x1, NumOfRoots);
+    if(isZero(coef.a)){
+        return lenearsorver(coef , sol);
     }
     
-    double D = b*b - 4*a*c;
+    double D = coef.b*coef.b - 4*coef.a*coef.c;
     
-    if(D > 0.0){  
-        *NumOfRoots = TwoRoots;       
-        *x1 = (-b + sqrt(D)) / (2*a);
-        *x2 = (-b - sqrt(D)) / (2*a);           
+
+    if(isZero(D)){
+        sol->root_count = OneRoot;
+        sol->x1 = -coef.b / (2*coef.a);          
     }
-    else if(isZero(D)){
-        *NumOfRoots = OneRoot;
-        *x1 = -b / (2*a);          
+    if(D < 0.0){
+        sol->root_count = NoRoots;
     }
+    else if(D > 0.0){  
+        sol->root_count = TwoRoots;       
+        sol->x1 = (-coef.b + sqrt(D)) / (2*coef.a);
+        sol->x2 = (-coef.b - sqrt(D)) / (2*coef.a);           
+    }
+    assert (sol->root_count);
     return 0;
 }

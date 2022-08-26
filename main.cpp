@@ -9,14 +9,16 @@
 
 
 int main(){ 
-    greeting();
     double a = 0.0, b = 0.0, c = 0.0, x1 = 0.0, x2 = 0.0;
     int NumOfRoots  = 0;
 
-    intput(&a, &b, &c);
+    coeficcents coef;
+    solutions sol;
 
-    solver(a, b, c, &x1, &x2, &NumOfRoots);
-    output(NumOfRoots, x1, x2);
+    intput(&coef);
+
+    solver(coef, &sol);
+    output(sol);
 
     return 0;
 }

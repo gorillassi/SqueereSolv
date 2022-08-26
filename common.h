@@ -17,12 +17,13 @@ enum NumOfRootsTest{
     InfinityTest = 3,
 };
 
-struct Equation
-{
+struct coeficcents{
     double a;
     double b;
     double c;
-    NumOfRoots count = NoRoots;
+};
+struct solutions{
+    NumOfRoots root_count = NoRoots;
     double x1;
     double x2;
 };
