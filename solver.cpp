@@ -50,6 +50,5 @@ int solver(struct coeficcents coef , struct solutions* sol){
         sol->x1 = (-coef.b + sqrt(D)) / (2*coef.a);
         sol->x2 = (-coef.b - sqrt(D)) / (2*coef.a);           
     }
-    assert (sol->root_count);
     return 0;
 }
