@@ -10,7 +10,7 @@ int isZero(double i){
 
 int lenearsorver(struct coeficcents coef, struct solutions* sol){
     assert (sol->x1);
-    assert (sol->root_count);
+    //assert (sol->root_count);
     
     if(isZero(coef.b)){
         (sol->root_count) = NoRoots;

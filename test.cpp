@@ -4,18 +4,26 @@
 #include "ioutput.h"
 #include "common.h"
 
+
+/*struct unitest quadraticeq[n]
+{
+    
+};
+
+
 void test(){
-    /*double a = 0.0, b = 0.0, c = 0.0, x1 = 0.0, x2 = 0.0, x1Test = 0.0,x2Test;
-    int NumOfRoots  = 0, NumOfRootsTest;
+    onetest(0, 0, 0, 3);
+    onetest(0, 0, 1, 0);
+    onetest(0, 1, 1, 1);
+    onetest(1, 2, 3, 0);
+    onetest(1, -2, 1, 1);
+    onetest(1, 5, -6, 2);
 
-    scanf("%lf %lf %lf %lf %lf %d", a, b, c, x1, x2, NumOfRoots);
-
-    solver(a, b, c, &x1Test, &x2Test, &NumOfRootsTest);
-
-    if((x1 == x1Test) && (x2 == x2Test) && (NumOfRoots == NumOfRootsTest)){
-        printf("Correct!");
-    }
-    else{
-        printf("Incorrect!");
-    }*/
 }
+
+void onetest(struct coeficcents coef, struct solutions sol) {
+    int rightans = sol.root_count;
+    double a = coef.a;
+    double b = coef.b;
+    double c = coef.c;
+}*/
