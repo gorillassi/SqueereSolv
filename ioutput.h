@@ -3,8 +3,10 @@
 
 int greeting();
 
-void intput(struct coeficcents* coef);
+void intput(double *a,double *b,double *c);
 
-int output(struct solutions sol);
+int output(const double x1,const double x2, const int num_of_roots);
+
+void clean_buffer();
 
 #endif // IOUTPUT_H

@@ -1,54 +1,103 @@
+#include <stdio.h>
 #include <assert.h>
 #include <math.h>
 #include "common.h"
 
 
 
-int isZero(double i){
-    return (fabs(i) < Epsilon);
+int isZero(double num)
+{
+    return (fabs(num) < EPSILON);
 }
 
-int lenearsorver(struct coeficcents coef, struct solutions* sol){
-    assert (sol->x1);
-    //assert (sol->root_count);
-    
-    if(isZero(coef.b)){
-        (sol->root_count) = NoRoots;
-    }
-    if(((isZero(coef.b)) && (isZero(coef.c)))){
-        (sol->root_count) = Infinity;
-    }
-    else{      
-        (sol->root_count) = OneRoot;
-        (sol->x1) = -(coef.c) / (coef.b);        
-    }  
-    return 0; 
-}
+int discriminant(const double a, const double b, const double c, double *x1, double *x2, int *num_of_roots)
+{
+    double D = b*b - 4*a*c;
 
-int solver(struct coeficcents coef , struct solutions* sol){
-    assert (sol->x1);
-    assert (sol->x2);
-    //
-    assert ( sol->x1 != sol->x2);
-
-    if(isZero(coef.a)){
-        return lenearsorver(coef , sol);
+    if (isZero(D)) 
+    {
+        *num_of_roots = ONE_ROOT;
+        *x1 = -b / (2 * a);          
     }
-    
-    double D = coef.b*coef.b - 4*coef.a*coef.c;
-    
-
-    if(isZero(D)){
-        sol->root_count = OneRoot;
-        sol->x1 = -coef.b / (2*coef.a);          
+    if(D < 0.0) 
+    {
+        *num_of_roots = NO_ROOT;
     }
-    if(D < 0.0){
-        sol->root_count = NoRoots;
-    }
-    else if(D > 0.0){  
-        sol->root_count = TwoRoots;       
-        sol->x1 = (-coef.b + sqrt(D)) / (2*coef.a);
-        sol->x2 = (-coef.b - sqrt(D)) / (2*coef.a);           
+    else if (D > 0.0) 
+    {
+        *num_of_roots = TWO_ROOTS;       
+        *x1 = (-b + sqrt(D)) / (2 * a);
+        *x2 = (-b - sqrt(D)) / (2 * a);           
     }
     return 0;
+}
+
+void lenearsorver(const double b,const double c, double *x1, double *x2, int *num_of_roots)
+{   
+
+    assert(x1);
+    assert(x2);
+
+    if (isZero(b)) 
+    {
+        if(isZero(c))
+        {
+            *num_of_roots = INF_ROOTS;
+        }
+        else
+        {
+            *num_of_roots = NO_ROOT;
+        }
+    }
+    else
+    {
+        if(isZero(c))
+        {
+            *num_of_roots = ONE_ROOT;
+            *x1 = 0;
+        }
+        else
+        {
+            *num_of_roots = ONE_ROOT;
+            *x1 = -c/b;
+        }
+    }
+}
+
+// TODO rename
+void solver(const double a,const double b,const double c, double *x1, double *x2, int *num_of_roots){
+    assert(x1);
+    assert(x2);
+
+    if (isZero(a)) 
+    {
+        lenearsorver(b, c, x1, x2, num_of_roots);
+    }
+    else
+    {
+        if(isZero(b))
+        {
+            if(isZero(c))
+            {
+                *num_of_roots = INF_ROOTS;
+            }
+            else
+            {
+                discriminant(a,b,c,x1,x2,num_of_roots);
+            }
+        }
+        else
+        {
+            if(isZero(c))
+            {
+                *num_of_roots = TWO_ROOTS;
+                *x1 = 0;
+                *x2 = -b/a;
+            }
+            else
+            {
+                discriminant(a,b,c,x1,x2,num_of_roots);
+            }
+        }
+    }
 }

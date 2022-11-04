@@ -1,29 +1,44 @@
 #include <stdio.h>
 #include "common.h"
 
+// TODO rename
+void clean_buffer()
+{
+    while(getchar() != '\n'){}
+    printf("Wrong input, please try again...\n");   
+}
 
-void intput(struct coeficcents* coef){
+
+void intput(double *a,double *b,double *c)
+{
     printf("Program: solver equation\n"
            "Enter your numbers:\n");
 
-    while((scanf("%lf %lf %lf", &coef->a, &coef->b, &coef->c) != 3)){        
-        while(getchar() != '\n'){}
-        printf("Wrong input, please try again...\n");
+    while((scanf("%lf %lf %lf", a, b, c) != 3))
+    {        
+        clean_buffer();
     }
 }
 
-int output(struct solutions sol){  
-    switch(sol.root_count){
-        case NoRoots: printf("No answers\n"); 
-                 break;
-        case OneRoot: printf("1 answer, x1 = %lf\n", sol.x1); 
-                 break;
-        case TwoRoots: printf("2 answers, x1 = %lf, x2 = %lf\n",sol.x1 , sol.x2); 
-                  break;
-        case Infinity: printf("Infinity\n"); 
-                  break;        
+// TODO rename
+int output(const double x1,const double x2, const int num_of_roots)
+{
+    switch(num_of_roots)
+    {
+        case NO_ROOT: 
+            printf("No answers\n"); 
+            break;
+        case ONE_ROOT:
+            printf("1 answer, x1 = %lf\n", x1); 
+            break;
+        case TWO_ROOTS:
+            printf("2 answers, x1 = %lf, x2 = %lf\n",x1 , x2); 
+            break;
+        case INF_ROOTS:
+            printf("Infinity\n"); 
+            break;        
         default:
-            printf("ERROR: expected NumOfRoots = 1, 2, inf OR NO ROOTS, GOT: %d\n", sol.root_count);
+            printf("ERROR: expected NumOfRoots = 1, 2, inf OR NO ROOTS, GOT: %d\n", num_of_roots);
     }
     return 0;
 }
